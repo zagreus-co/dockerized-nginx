@@ -1,0 +1,15 @@
+version: '3'
+services:
+  nginx:
+    image: nginx:latest
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./sites:/etc/nginx/conf.d
+      - ./certs:/etc/nginx/certs
+      - ./default:/var/www/default
+    environment:
+      - DEFAULT_DOMAIN=zagreus.company
+    command: ['nginx-debug', '-g', 'daemon off;']
